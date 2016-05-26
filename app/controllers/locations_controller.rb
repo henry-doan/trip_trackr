@@ -13,7 +13,7 @@ class LocationsController < ApplicationController
 
   def update
     if @location.update(location_params)
-        redirect_to location_path(@location)
+      redirect_to location_path(@location)
     else          
       #TODO make a flash message
       render :edit
@@ -21,26 +21,28 @@ class LocationsController < ApplicationController
   end
 
   def new
+    @trip = Trip.find(params[:trip_id])
     @location = Location.new
   end
 
   def create
-    @location = Location.new(location_params)
-      if @location.save
-          redirect_to locations_path
-      else
-          #TODO make a flash message
-          render :new
-      end
+    @trip = Trip.find(params[:trip_id])
+    @location = @trip.locations.new(location_params)
+    if @location.save
+      redirect_to trip_location_path(@trip, @location)
+    else
+      #TODO make a flash message
+      render :new
+    end
   end
 
   def destroy
-      if @location.destroy
+    if @location.destroy
       redirect_to :locations_path
-      else
-          #flash error message
-          redirect_to :location_path
-      end
+    else
+      #flash error message
+      redirect_to :location_path
+    end
   end
 
   private

@@ -17,20 +17,22 @@ ActiveRecord::Schema.define(version: 20160526200446) do
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "country"
-    t.string   "city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "country",     null: false
+    t.string   "city",        null: false
+    t.integer  "location_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string   "place"
+    t.string   "place",      null: false
+    t.integer  "trip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "trips", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.string   "info"
     t.string   "date"
     t.datetime "created_at", null: false

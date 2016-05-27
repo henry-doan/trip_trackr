@@ -1,3 +1,11 @@
 <h1>New Location</h1>
 
+
 <%= render (partial 'form') %>
+<%= form_for [@trip, @location] do |f| %>
+	<%= f.label :place %>
+	<%= f.text_field :place %>
+
+	<%= f.submit %>
+<% end %>
+

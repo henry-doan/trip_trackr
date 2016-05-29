@@ -1,12 +1,11 @@
 class LocationsController < ApplicationController
-	before_action :location, only: [:edit, :show, :update, :destroy]
+    before_action :location, only: [:edit, :show, :update, :destroy]
+  before_action :trip, only: [:index, :show, :new, :create]
   def index
-    @trip = Trip.find(params[:trip_id])
-    @locations = Location.where(trip_id: @trip)
+    @locations = Location.all
   end
 
   def show
-    @trip = Trip.find(params[:trip_id])
   end
 
   def edit
@@ -15,19 +14,17 @@ class LocationsController < ApplicationController
   def update
     if @location.update(location_params)
       redirect_to location_path(@location)
-    else          
+    else
       #TODO make a flash message
       render :edit
     end
   end
 
   def new
-    @trip = Trip.find(params[:trip_id])
     @location = Location.new
   end
 
   def create
-    @trip = Trip.find(params[:trip_id])
     @location = @trip.locations.new(location_params)
     if @location.save
       redirect_to trip_location_path(@trip, @location)
@@ -39,14 +36,17 @@ class LocationsController < ApplicationController
 
   def destroy
     if @location.destroy
-      redirect_to :locations_path
+      redirect_to locations_path
     else
       #flash error message
-      redirect_to :location_path
+      redirect_to locations_path
     end
   end
 
   private
+    def trip
+      @trip = Trip.find(params[:trip_id])
+    end
 
     def location
       @location = Location.find(params[:trip_id])
@@ -54,5 +54,5 @@ class LocationsController < ApplicationController
 
     def location_params
       params.require(:location).permit(:place, :trip_id)
-    end 
+    end
 end

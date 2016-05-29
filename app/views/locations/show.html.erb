@@ -1,4 +1,5 @@
-<h2><%= @trips %></h2>
+<h1>Location of: <%= @trip.name %></h1>
 
-<h1>Location#show</h1>
+<h1><%= @location.place%> </h1>
 
+<%= link_to 'Back', trip_locations_path(@trip) %>

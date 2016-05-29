@@ -36,10 +36,10 @@ class TripsController < ApplicationController
 
   def destroy
   	if @trip.destroy
-  	redirect_to :trips_path
+  	redirect_to trips_path
   	else
   		#flash error message
-  		redirect_to :trip_path
+  		redirect_to trip_path
   	end
   end
 

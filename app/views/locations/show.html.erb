@@ -2,4 +2,16 @@
 
 <h1><%= @location.place%> </h1>
 
+
+
+<% if @location.address.nil? %>
+  <h4>No Address Found Please Add One</h4>
+  <%= link_to 'Add Address', new_location_address_path(@location) %>
+<% else %>
+  <h4>Address</h4>
+  <p>Country: <%= @location.address.country %></p>
+  <p>City: <%= @location.address.city %></p>
+  <%= link_to 'Edit Address', edit_location_address_path(@location, @location.address) %>
+<% end %>
+
 <%= link_to 'Back', trip_locations_path(@trip) %>

@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-    before_action :location, only: [:edit, :show, :update, :destroy]
+  before_action :location, only: [:edit, :show, :update, :destroy]
   before_action :trip, only: [:index, :show, :new, :create]
   def index
     @locations = Location.all
@@ -49,7 +49,7 @@ class LocationsController < ApplicationController
     end
 
     def location
-      @location = Location.find(params[:trip_id])
+      @location = Location.find(params[:id])
     end
 
     def location_params
